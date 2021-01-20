@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5F5EA2539018F90E1E198EB /* Pods_RadioController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F5BCDAAC192C3BAACEC0C9 /* Pods_RadioController.framework */; };
 		DF6D5EAA25B8A1AE00EFF46F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6D5EA925B8A1AE00EFF46F /* AppDelegate.swift */; };
 		DF6D5EAC25B8A1AE00EFF46F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6D5EAB25B8A1AE00EFF46F /* SceneDelegate.swift */; };
 		DF6D5EAE25B8A1AE00EFF46F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6D5EAD25B8A1AE00EFF46F /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3EACA82E7F1C874A4786A21E /* Pods-RadioController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadioController.release.xcconfig"; path = "Target Support Files/Pods-RadioController/Pods-RadioController.release.xcconfig"; sourceTree = "<group>"; };
+		66F5BCDAAC192C3BAACEC0C9 /* Pods_RadioController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadioController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B69A756ECAEA8D2B3C6F0319 /* Pods-RadioController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadioController.debug.xcconfig"; path = "Target Support Files/Pods-RadioController/Pods-RadioController.debug.xcconfig"; sourceTree = "<group>"; };
 		DF6D5EA625B8A1AE00EFF46F /* RadioController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadioController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6D5EA925B8A1AE00EFF46F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF6D5EAB25B8A1AE00EFF46F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5F5EA2539018F90E1E198EB /* Pods_RadioController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C30286C1256A53C5F18A0FCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66F5BCDAAC192C3BAACEC0C9 /* Pods_RadioController.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DF6D5E9D25B8A1AE00EFF46F = {
 			isa = PBXGroup;
 			children = (
 				DF6D5EA825B8A1AE00EFF46F /* RadioController */,
 				DF6D5EA725B8A1AE00EFF46F /* Products */,
+				F4B0404C75C51A6DDCE1C07A /* Pods */,
+				C30286C1256A53C5F18A0FCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,16 @@
 			path = RadioController;
 			sourceTree = "<group>";
 		};
+		F4B0404C75C51A6DDCE1C07A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B69A756ECAEA8D2B3C6F0319 /* Pods-RadioController.debug.xcconfig */,
+				3EACA82E7F1C874A4786A21E /* Pods-RadioController.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF6D5EBA25B8A1B100EFF46F /* Build configuration list for PBXNativeTarget "RadioController" */;
 			buildPhases = (
+				B788A774767B7ACFD7B25D55 /* [CP] Check Pods Manifest.lock */,
 				DF6D5EA225B8A1AE00EFF46F /* Sources */,
 				DF6D5EA325B8A1AE00EFF46F /* Frameworks */,
 				DF6D5EA425B8A1AE00EFF46F /* Resources */,
+				73FAAD25F3DAB5BAD0B36382 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		73FAAD25F3DAB5BAD0B36382 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadioController/Pods-RadioController-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RadioController/Pods-RadioController-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RadioController/Pods-RadioController-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B788A774767B7ACFD7B25D55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RadioController-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DF6D5EA225B8A1AE00EFF46F /* Sources */ = {
@@ -283,10 +352,12 @@
 		};
 		DF6D5EBB25B8A1B100EFF46F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B69A756ECAEA8D2B3C6F0319 /* Pods-RadioController.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XGT349SB44;
 				INFOPLIST_FILE = RadioController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -301,10 +372,12 @@
 		};
 		DF6D5EBC25B8A1B100EFF46F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EACA82E7F1C874A4786A21E /* Pods-RadioController.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XGT349SB44;
 				INFOPLIST_FILE = RadioController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
