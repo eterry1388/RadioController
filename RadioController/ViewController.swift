@@ -7,9 +7,10 @@
 
 import UIKit
 import CoreMotion
+import CoreLocation
 import Starscream
 
-class ViewController: UIViewController, WebSocketDelegate {
+class ViewController: UIViewController, WebSocketDelegate, CLLocationManagerDelegate {
     var socket: WebSocket!
     var isConnected = false
     let server = WebSocketServer()
@@ -17,13 +18,23 @@ class ViewController: UIViewController, WebSocketDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var request = URLRequest(url: URL(string: "http://192.168.1.18:8080")!)
+        var request = URLRequest(url: URL(string: "http://192.168.1.3:8080")!)
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
         
         startAccelerometers()
+    }
+    
+    var touchX = CGFloat()
+    var touchY = CGFloat()
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let location = touch.location(in: self.view)
+        self.touchX = location.x
+        self.touchY = location.y
     }
     
     func didReceive(event: WebSocketEvent, client: WebSocket) {
@@ -65,30 +76,52 @@ class ViewController: UIViewController, WebSocketDelegate {
     }
     
     let motion = CMMotionManager()
+    let location = CLLocationManager()
     var timer = Timer()
     
     func startAccelerometers() {
        // Make sure the accelerometer hardware is available.
-       if self.motion.isAccelerometerAvailable {
-          self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
-          self.motion.startAccelerometerUpdates()
-
+        if self.motion.isAccelerometerAvailable && self.motion.isMagnetometerAvailable && self.motion.isDeviceMotionAvailable {
+            self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
+            self.motion.magnetometerUpdateInterval = 1.0 / 60.0  // 60 Hz
+            self.motion.deviceMotionUpdateInterval = 1.0 / 60.0  // 60 Hz
+            self.motion.startAccelerometerUpdates()
+            self.motion.startMagnetometerUpdates()
+            self.motion.startDeviceMotionUpdates()
+            
+            self.location.requestAlwaysAuthorization()
+            self.location.startUpdatingHeading()
+            
           // Configure a timer to fetch the data.
           self.timer = Timer(fire: Date(), interval: (1.0/60.0), repeats: true, block: { (timer) in
-             // Get the accelerometer data.
-             if let data = self.motion.accelerometerData {
-                let x = data.acceleration.x
-                let y = data.acceleration.y
-                let z = data.acceleration.z
-
-                // Use the accelerometer data in your app.
-                print("X: \(x), Y: \(y), Z: \(z)")
-                self.socket.write(string: "X: \(x), Y: \(y), Z: \(z)")
+            // Get the accelerometer data.
+            let accData = self.motion.accelerometerData
+            let magData = self.motion.magnetometerData
+            let motData = self.motion.deviceMotion
+            let heading = self.location.heading!.trueHeading
+            
+            if accData != nil && magData != nil && motData != nil {
+                let accX = accData!.acceleration.x
+                let accY = accData!.acceleration.y
+                
+                let magX = magData!.magneticField.x
+                let magY = magData!.magneticField.y
+                let magZ = magData!.magneticField.z
+                
+                let graX = motData!.gravity.x
+                let graY = motData!.gravity.y
+                let graZ = motData!.gravity.z
+                
+                let uaccX = motData!.userAcceleration.x
+                let uaccY = motData!.userAcceleration.y
+                let uaccZ = motData!.userAcceleration.z
+                
+                self.socket.write(string: "{ \"accX\": \"\(accX)\", \"accY\": \"\(accY)\", \"magX\": \"\(magX)\", \"magY\": \"\(magY)\", \"magZ\": \"\(magZ)\", \"graX\": \"\(graX)\", \"graY\": \"\(graY)\", \"graZ\": \"\(graZ)\", \"uaccX\": \"\(uaccX)\", \"uaccY\": \"\(uaccY)\", \"uaccZ\": \"\(uaccZ)\", \"heading\": \"\(heading)\", \"touchX\": \"\(self.touchX)\", \"touchY\": \"\(self.touchY)\" }")
              }
           })
 
           // Add the timer to the current run loop.
-        RunLoop.current.add(self.timer, forMode: RunLoop.Mode.default)
+          RunLoop.current.add(self.timer, forMode: RunLoop.Mode.default)
        }
     }
 }
